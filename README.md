@@ -9,3 +9,5 @@
 - Chose 4 years because that essentially most drafted players are under team control for the first 4 years after being drafted
 
 ### [4-Year AV Draft Calculator](https://mangrobang.shinyapps.io/Project_Draft_AV/)
+
+*(Project originally created as part of [Coursera Johns Hopkins Data Science](https://www.coursera.org/learn/data-science-project/home/welcome) course)*
