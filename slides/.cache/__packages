@@ -1,0 +1,10 @@
+base
+leaflet
+webshot
+htmlwidgets
+ggplot2
+plotly
+bindrcpp
+RColorBrewer
+dplyr
+DT
