@@ -15,8 +15,8 @@
 ---
 ### Update: 2022.02
 I'm in the process of updating and cleaning up the slides, but looks like some
-of the tools I used (e.g. slidify) before have been deprecated. I'm looking into
-using R Presentation (which is also 'knits' to an HTML5 product) is a viable 
+of the tools I used before (e.g. slidify) have been deprecated. I'm looking into
+using R Presentation (which also 'knits' to an HTML5 product) is a viable 
 alternative; see branch **cloud** (I'm using RStudio cloud for this mini-update
 project).
 
