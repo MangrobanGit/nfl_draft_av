@@ -111,13 +111,14 @@ code {
 # Developing Data Products
 ---------------------
 
-## Week 4 Project - [Shiny App](https://gitamoveon.shinyapps.io/Project_Draft_AV/) and HTML5 Presentation  
-`r format(Sys.Date(), "%B %d, %Y")`
+## Week 4 Project - [Shiny App](https://mangrobang.shinyapps.io/Project_Draft_AV/) and HTML5 Presentation  
+<!-- `r format(Sys.Date(), "%B %d, %Y")` -->
+`r format(as.Date("2018-05-08"), "%B %d, %Y")`
 
 <small>
-[werlindo](https://www.linkedin.com/in/werlindo/)|[(GitHub)](https://github.com/gitamoveon)  
+[werlindo](https://www.linkedin.com/in/werlindo/)|[(GitHub)](https://mangrobangit.github.io)  
 
-[RMD for these slides](https://github.com/GitAMoveOn/DDP/blob/gh-pages/slides/index.Rmd)
+[RMD for these slides](https://github.com/mangrobangit/DDP/blob/gh-pages/slides/index.Rmd)
 </small>
 
 ---  
@@ -183,7 +184,7 @@ library(ggplot2)
 library(RColorBrewer)
 library(dplyr)
 
-file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/nfl_draft.csv"
+file.path <-"https://raw.githubusercontent.com/mangrobangit/DDP/gh-pages/nfl_draft.csv"
 draft <- read.csv(file.path)
 
 draft <- draft %>%
@@ -286,18 +287,17 @@ cat('<pre><iframe src="./assets/img/ps.html" width=100% height=350px allowtransp
 
 --- .class4 #idDemo
 ## Approximate Value Predictor for Drafted Player
-[link](https://gitamoveon.shinyapps.io/Project_Draft_AV/)
 
 As an example, here are the estimated 4-Year AVs of the Seahawks' 2018 draft class. The total estimated 4-Year AV is 122.7.
 
-Code: [ui.R](https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/app/ui.R) and [server.R](https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/app/server.R)
+Code: [ui.R](https://raw.githubusercontent.com/mangrobangit/DDP/gh-pages/app/ui.R) and [server.R](https://raw.githubusercontent.com/mangrobangit/DDP/gh-pages/app/server.R)
 
 Go Hawks.
 
 ```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE, results="asis"}
 library(DT)
 library(htmlwidgets)
-file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/seahawks_results.csv"
+file.path <-"https://raw.githubusercontent.com/mangrobangit/DDP/gh-pages/seahawks_results.csv"
 sea.res <- read.csv(file.path)
 
 colnames(sea.res)[1]<-"Round"

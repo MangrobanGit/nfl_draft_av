@@ -2,7 +2,7 @@
 title       : Week 4 Project - Shiny App and HTML5 Presentation
 subtitle    : Predicting Value of Drafted NFL Players
 author      : werlindo
-job         : 'May 08, 2018'
+job         : 'January 29, 2019'
 framework   : revealjs     # {io2012, html5slides, shower, dzslides, ...}
 revealjs    :
   theme     : sky     #sky #night
@@ -111,13 +111,14 @@ code {
 # Developing Data Products
 ---------------------
 
-## Week 4 Project - [Shiny App](https://gitamoveon.shinyapps.io/Project_Draft_AV/) and HTML5 Presentation  
+## Week 4 Project - [Shiny App](https://mangrobang.shinyapps.io/Project_Draft_AV/) and HTML5 Presentation  
+<!-- January 29, 2019 -->
 May 08, 2018
 
 <small>
-[werlindo](https://www.linkedin.com/in/werlindo/)|[(GitHub)](https://github.com/gitamoveon)  
+[werlindo](https://www.linkedin.com/in/werlindo/)|[(GitHub)](https://mangrobangit.github.io)  
 
-[RMD for these slides](https://github.com/GitAMoveOn/DDP/blob/gh-pages/slides/index.Rmd)
+[RMD for these slides](https://github.com/mangrobangit/DDP/blob/gh-pages/slides/index.Rmd)
 </small>
 
 ---  
@@ -160,11 +161,10 @@ We built an app that estimates the first four years of [Approximate Value](https
 
 --- .class4 #idDemo
 ## Approximate Value Predictor for Drafted Player
-[link](https://gitamoveon.shinyapps.io/Project_Draft_AV/)
 
 As an example, here are the estimated 4-Year AVs of the Seahawks' 2018 draft class. The total estimated 4-Year AV is 122.7.
 
-Code: [ui.R](https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/app/ui.R) and [server.R](https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/app/server.R)
+Code: [ui.R](https://raw.githubusercontent.com/mangrobangit/DDP/gh-pages/app/ui.R) and [server.R](https://raw.githubusercontent.com/mangrobangit/DDP/gh-pages/app/server.R)
 
 Go Hawks.
 

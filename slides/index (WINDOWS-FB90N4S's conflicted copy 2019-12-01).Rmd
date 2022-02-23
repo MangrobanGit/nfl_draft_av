@@ -1,0 +1,310 @@
+---
+title       : Week 4 Project - Shiny App and HTML5 Presentation
+subtitle    : Predicting Value of Drafted NFL Players
+author      : werlindo
+job         : '`r format(Sys.Date(), "%B %d, %Y")`'
+framework   : revealjs     # {io2012, html5slides, shower, dzslides, ...}
+revealjs    :
+  theme     : sky     #sky #night
+  transition: convex
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+widgets     : [plotly, leaflet, mathjax, quiz, bootstrap]            # {mathjax, quiz, bootstrap}
+ext_widgets : {rCharts: [libraries/nvd3, libraries/leaflet, libraries/plotly]}
+hitheme     : github
+mode        : selfcontained
+knit        : slidify::knit2slides
+#biglogo        : hawkslogo.png
+assets      : {assets: ../../assets}
+
+--- 
+<link href="https://fonts.googleapis.com/css?family=Noto+Serif|Source+Sans+Pro" rel="stylesheet">
+
+<!-- font-family: 'Noto Serif', cursive; -->
+<!-- font-family: 'Roboto Condensed', sans-serif; -->
+
+<style>
+.reveal {
+  font-family: "Source Sans Pro", sans-serif;
+  font-size: 40px;
+  font-weight: normal;
+  color: #545454; }
+  
+.reveal h1 {
+    font-size: 1.5em;
+    // color: #0000b3;
+    padding-bottom: 10px;
+    font-family: 'Noto Serif', serif;
+    line-height: 10px;
+}
+
+.reveal h2 {
+    font-size: 1em;
+    //color: #fff7e6;
+    padding-bottom: 10px;
+    font-family: 'Noto Serif', serif;
+}
+
+.reveal h3 {
+    font-size: .75em;
+    //color: #69BE28;
+    padding-bottom: 10px;
+    font-family: "Source Sans Pro", sans-serif;
+}
+
+.reveal p, .reveal em {
+    padding-bottom: 10px;
+    width: 960px;
+    font-family: 'Source Sans Pro', cursive;
+}
+
+.reveal p {
+    font-size: .8em;
+}
+
+.reveal small {
+    width: 500px;
+}
+
+.reveal ul {
+  list-style-type: disc; 
+    font-size: .8em;
+}
+
+.reveal .slides {
+    text-align: left;
+}
+
+.reveal .roll {
+    vertical-align: text-bottom;
+}
+
+code {
+    color: red;
+}
+
+.reveal pre code { 
+     height: 250px;
+}
+
+
+#left {
+  left:-8.33%;
+  text-align: left;
+  float: left;
+  width:50%;
+  z-index:-10;
+}
+
+#right {
+  left:31.25%;
+  top: 75px;
+  float: right;
+  text-align: right;
+  z-index:-10;
+  width:50%;
+}
+
+
+</style>
+
+
+# Developing Data Products
+---------------------
+
+## Week 4 Project - [Shiny App](https://gitamoveon.shinyapps.io/Project_Draft_AV/) and HTML5 Presentation  
+`r format(Sys.Date(), "%B %d, %Y")`
+
+<small>
+[werlindo](https://www.linkedin.com/in/werlindo/)|[(GitHub)](https://github.com/gitamoveon)  
+</small>
+
+---  
+
+## The Use Case
+
+- National Football League teams (American Football :D ) have an annual draft of college players.
+- Each team has by default a set amount of draft picks, which can increase and decrease.  
+    - Trades between teams
+    - League action (E.g. team may be compensated with an extra pick, or penalized a pick, etc.)
+- How can teams maximize the value they get out of their draft picks?
+
+--- .class2 #id2 bg:#002145
+
+## Example - Seattle Seahawks
+
+- The Seattle Seahawks didn't have picks in Round 2 or 3 before the start of the 2018 NFL Draft. 
+- Thus it was especially important for them to extract maximum "value" from those picks.
+
+```{r, echo=FALSE,warning=FALSE, results='asis'}
+library(leaflet)
+library(webshot)
+library(htmlwidgets)
+
+hawkIcon <- makeIcon(
+  iconUrl = "https://upload.wikimedia.org/wikipedia/it/0/01/Seattle_Seahawks_Logo_2012.png",
+  iconWidth = 120, iconHeight = 60,
+  iconAnchorX = 60, iconAnchorY = -20
+)
+
+hawkLatLong <- data.frame( lat = c(47.595383)
+                           ,long = c(-122.331586) )
+
+lfhawk <- hawkLatLong %>%
+  leaflet %>%
+  addTiles() %>%
+  addMarkers(icon = hawkIcon, popup = "Go Hawks!") %>%
+  setView(hawkLatLong$long, hawkLatLong$lat, zoom=10)
+
+# Move to img folder
+setwd("./assets/img")
+saveWidget(lfhawk, 'lfhawk.html') # Save widget html
+setwd("../..")
+
+# Source saved file
+cat('<pre><iframe src="./assets/img/lfhawk.html" width=100% height=350px allowtransparency="true"> </iframe></pre>')
+```
+
+--- .class3 #Appy bg:#66C010
+## What are some variable that impact value?
+Countless! But we'll focus on a few that were likely obvious to you:
+
+- Round - There are 7 rounds of draft picks
+- Position - The player's position on the playing field
+- Age - How old at time of draft
+- College/University - What school the player played at
+
+We built an app that estimates the first four years of [Approximate Value](https://www.pro-football-reference.com/blog/index37a8.html) of a drafted player. 
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE, results="asis"}
+library(plotly)
+library(ggplot2)
+library(RColorBrewer)
+library(dplyr)
+
+file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/nfl_draft.csv"
+draft <- read.csv(file.path)
+
+draft <- draft %>%
+  filter(Year<=2012) %>%
+  filter(Year>=1994)
+
+avg.4.AV.round <- draft %>%
+  group_by(Rnd) %>%
+  summarise(avg.F4.AV = mean(First4AV)) %>%
+  arrange(Rnd)
+# avg.4.AV.round
+
+ct.4.AV.round <- draft %>%
+  group_by(Rnd) %>%count(Rnd) %>%
+  arrange(Rnd)
+# ct.4.AV.round
+
+tbl.round <- inner_join(avg.4.AV.round,ct.4.AV.round,by="Rnd")
+# tbl.round
+
+avg.4.AV.age <- draft %>%
+  group_by(Age) %>%
+  summarise(avg.F4.AV = mean(First4AV)) %>%
+  arrange(Age)
+# avg.4.AV.age
+
+ct.4.AV.age <- draft %>%
+  group_by(Age) %>%
+  count(Age) %>%
+  arrange(Age)
+# ct.4.AV.age
+
+tbl.age<- inner_join(avg.4.AV.age,ct.4.AV.age,by="Age")
+# tbl.age
+
+avg.4.AV.pos <- draft %>%
+  group_by(Pos) %>%
+  summarise(avg.F4.AV = mean(First4AV)) %>%
+  arrange(Pos)
+# avg.4.AV.pos
+
+ct.4.AV.pos <- draft %>%
+  group_by(Pos) %>%
+  count(Pos) %>%
+  arrange(Pos)
+# ct.4.AV.pos
+
+tbl.pos<- inner_join(avg.4.AV.pos,ct.4.AV.pos,by="Pos")
+# tbl.pos
+
+xx <- list(title = "Draft Round")
+yy <- list(title = "AV over First 4 Years")
+
+p1 <- plot_ly(tbl.round
+             , x = ~Rnd
+             , y = ~avg.F4.AV
+             # , color = ~n
+             , type = "bar"
+             , colors = brewer.pal(1, "Blues")
+             , name = 'Draft Round' ) %>%
+  layout(xaxis = xx, yaxis = yy) 
+# p1
+p2 <- plot_ly(tbl.age
+              , x = ~Age
+              , y = ~avg.F4.AV
+              , type = "bar"
+              # , color = ~n
+              , colors = brewer.pal(1, "Greens")
+              , name = 'Age' ) %>%
+  layout(xaxis = xx, yaxis = yy) 
+# p2
+p3 <- plot_ly(tbl.pos
+              , x = ~Pos
+              , y = ~avg.F4.AV
+              , type = "bar"
+              # , color = ~n
+              , colors = brewer.pal(1, "Reds")
+              , name = 'Position' ) %>%
+  layout(xaxis = xx, yaxis = yy) 
+# p3
+ps <-subplot(p1,p2,p3, shareX = FALSE, shareY = TRUE, nrows = 1) %>%
+   layout(title = "Avg 4 Yr AV by Features")
+# ps
+
+# Move to img folder
+setwd("./assets/img")
+saveWidget(ps, 'ps.html') # Save widget html
+setwd("../..")
+
+# Source saved file
+cat('<pre><iframe src="./assets/img/ps.html" width=100% height=350px allowtransparency="true"> </iframe></pre>')
+
+```
+
+
+<div id="right">
+
+</div>
+
+
+--- .class4 #idDemo
+## Approximate Value Predictor for Drafted Player
+
+As an example, here are the estimated 4-Year AVs of the Seahawks' 2018 draft class. The total estimated 4-Year AV is 122.7.
+
+Go Hawks.
+
+```{r, echo=FALSE, warning=FALSE, message=FALSE, eval=TRUE, results="asis"}
+library(DT)
+library(htmlwidgets)
+file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/seahawks_results.csv"
+sea.res <- read.csv(file.path)
+
+colnames(sea.res)[1]<-"Round"
+# sea.res
+
+dt.sea <- datatable(sea.res)
+
+# Move to img folder
+setwd("./assets/img")
+saveWidget(dt.sea, 'dtsea.html') # Save widget html
+setwd("../..")
+
+# Source saved file
+cat('<pre><iframe src="./assets/img/dtsea.html" width=150% height=350px allowtransparency="true"> </iframe></pre>')
+```
