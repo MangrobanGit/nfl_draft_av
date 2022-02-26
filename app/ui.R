@@ -7,8 +7,8 @@ library(tidyr)
 library(DT)
 
 # draft <- read.csv(paste0( file.path, '/nfl_draft.csv'))
-#file.path <-"data/nfl_draft.csv"
-file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/nfl_draft.csv"
+# file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/nfl_draft.csv"
+file.path <-"https://raw.githubusercontent.com/MangrobanGit/nfl_draft_av/master/data/nfl_draft.csv"
 draft <- read.csv(file.path)
 
 # EDA
@@ -20,8 +20,6 @@ dim(draft)
 # Want to keep this simple for the shiny app. I think the most naive but
 # generalizeable, understandable realtionship for audience is round pick
 # vs Career AV
-library(dplyr)
-library(tidyr)
 
 # I think that the # of rounds reduced to 7 over the years, so figure that out
 dd <- draft %>%
@@ -56,7 +54,7 @@ draft <- draft %>%
   drop_na(First4AV)
 
 nrow(draft)
-# 4519 rows. Same as before. So I was right.
+# 4772 rows. Same as before. So I was right.
 
 # I want average four-year AV by draft round, across all positions
 avg.4.AV <- draft %>%
