@@ -97,7 +97,7 @@ autosize: true
 <!-- font-family: 'Courier' -->
 
 [LinkedIn](https://www.linkedin.com/in/werlindo/) | 
-[GitHub](https://mangrobangit.github.io) |
+[GitHub](https://github.com/MangrobanGit) |
 [Medium](https://medium.com/@werlindo) | 
 [About Me](https://werlindo.com)
 
