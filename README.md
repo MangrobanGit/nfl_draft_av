@@ -13,10 +13,4 @@
 *(Project originally created as part of [Coursera Johns Hopkins Data Science](https://www.coursera.org/learn/data-science-project/home/welcome) course)*
 
 ---
-### Update: 2022.02
-I'm in the process of updating and cleaning up the slides, but looks like some
-of the tools I used before (e.g. slidify) have been deprecated. I'm looking into
-using R Presentation (which also 'knits' to an HTML5 product) is a viable 
-alternative; see branch **cloud** (I'm using RStudio cloud for this mini-update
-project).
 
