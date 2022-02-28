@@ -7,7 +7,6 @@ library(tidyr)
 library(DT)
 
 # draft <- read.csv(paste0( file.path, '/nfl_draft.csv'))
-# file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/nfl_draft.csv"
 file.path <-"https://raw.githubusercontent.com/MangrobanGit/nfl_draft_av/master/data/nfl_draft.csv"
 draft <- read.csv(file.path)
 
@@ -126,7 +125,7 @@ shinyUI(fluidPage(
                     ,h4("Detailed Table")
                     ,p("For those, curious here is the detailed data, in descending order of greatest AV in first four years.")
                     ,DT::dataTableOutput("mytable")
-                    , tags$a(href="https://www.kaggle.com/ronaldjgrafjr/nfl-draft-outcomes", "You can fine the source here (Kaggle Datasets)")
+                    , tags$a(href="https://www.kaggle.com/ronaldjgrafjr/nfl-draft-outcomes", "You can find the source here (Kaggle Datasets)")
                     )
       )
     )

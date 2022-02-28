@@ -6,9 +6,8 @@ library(dplyr)
 library(tidyr)
 library(DT)
 
-# draft <- read.csv(paste0( file.path, '/nfl_draft.csv'))
-# file.path <-"data/nfl_draft.csv"
-file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/nfl_draft.csv"
+# file.path <-"https://raw.githubusercontent.com/GitAMoveOn/DDP/gh-pages/nfl_draft.csv"
+file.path <-"https://raw.githubusercontent.com/MangrobanGit/nfl_draft_av/master/data/nfl_draft.csv"
 draft <- read.csv(file.path)
 
 # EDA
