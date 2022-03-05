@@ -138,8 +138,9 @@ As an example, here are the estimated 4-Year AVs of the Seahawks' 2018 draft cla
 
 The total estimated 4-Year AV is 122.7.
 
-Code: [ui.R](https://raw.githubusercontent.com/mangrobangit/DDP/gh-pages/app/ui.R) and [server.R](https://raw.githubusercontent.com/mangrobangit/DDP/gh-pages/app/server.R)
-
 Go Hawks.
+
+**Shiny App Code (in R):**  
+[User Interface (ui.R)](https://raw.githubusercontent.com/MangrobanGit/nfl_draft_av/master/app/ui.R) and [Logic (server.R)](https://raw.githubusercontent.com/MangrobanGit/nfl_draft_av/master/app/server.R)
 
 <pre><iframe src="./assets/img/dtsea.html" width=150% height=350px allowtransparency="true"> </iframe></pre>
